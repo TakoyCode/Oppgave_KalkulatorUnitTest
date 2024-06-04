@@ -94,7 +94,7 @@ namespace Oppgave_KalkulatorUnitTest.Test
 
         [TestCase(1, 5, 0.2)]
         [TestCase(10, 5, 2)]
-        [TestCase(10, -6, 1.66)]
+        [TestCase(10, -6, -1.6666666666666667)]
         public void TestDivideTogether(int number1, int number2, double expSum)
         {
             // arrange
@@ -106,15 +106,34 @@ namespace Oppgave_KalkulatorUnitTest.Test
             // assert
             Assert.AreEqual(expSum, sum);
         }
-        [Test]
-        public void TestDivideBy0()
+
+        [TestCase(5, 0)]
+        [TestCase(0, 3)]
+        [TestCase(0, 0)]
+        public void TestDivideBy0(int number1, int number2)
         {
             // arrange
             var calc = new Calculator();
 
             // act
             // assert
-            Assert.Throws<ArgumentException>(() => calc.Divider(5, 0));
+            Assert.Throws<ArgumentException>(() => calc.Divider(number1, number2));
+        }
+        [Test]
+        public void TestDivideByNull()
+        {
+            // arrange
+            var calc = new Calculator();
+
+            // act
+            var result1 = calc.Divider(null, 44);
+            var result2 = calc.Divider(53, null);
+            var result3 = calc.Divider(null, null);
+
+            // assert
+            Assert.IsNull(result1);
+            Assert.IsNull(result2);
+            Assert.IsNull(result3);
         }
     }
 }

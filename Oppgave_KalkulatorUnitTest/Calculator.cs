@@ -17,9 +17,9 @@
             return a * b;
         }
 
-        public double Divider(int a, int b)
+        public double? Divider(double? a, double? b)
         {
-            if (b == 0)
+            if (a == 0 || b == 0)
             {
                 throw new ArgumentException("Cannot divide by zero.");
             }
